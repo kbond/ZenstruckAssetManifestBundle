@@ -1,7 +1,7 @@
 {
     "name": "zenstruck/asset-manifest-bundle",
     "description": "Loads an asset manifest to map your assets to dynamic ones.",
-    "keywords": ["asset", "frontent", "gulp", "grunt", "css", "javascript", "twig"],
+    "keywords": ["asset", "frontend", "gulp", "grunt", "css", "javascript", "twig"],
     "homepage": "http://zenstruck.com/project/ZenstruckAssetManifestBundle",
     "type": "symfony-bundle",
     "license": "MIT",
