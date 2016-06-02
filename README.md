@@ -1,6 +1,18 @@
 ZenstruckAssetManifestBundle
 ============================
 
+[![Build Status](http://img.shields.io/travis/kbond/ZenstruckAssetManifestBundle.svg?style=flat-square)](https://travis-ci.org/kbond/ZenstruckAssetManifestBundle)
+[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/kbond/ZenstruckAssetManifestBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/kbond/ZenstruckAssetManifestBundle/)
+[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/kbond/ZenstruckAssetManifestBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/kbond/ZenstruckAssetManifestBundle/)
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/b6b71c60-69f0-4e83-9900-bfd30621cb94.svg?style=flat-square)](https://insight.sensiolabs.com/projects/b6b71c60-69f0-4e83-9900-bfd30621cb94)
+[![StyleCI](https://styleci.io/repos/56626101/shield)](https://styleci.io/repos/56626101)
+[![Latest Stable Version](http://img.shields.io/packagist/v/zenstruck/asset-manifest-bundle.svg?style=flat-square)](https://packagist.org/packages/zenstruck/asset-manifest-bundle)
+[![License](http://img.shields.io/packagist/l/zenstruck/asset-manifest-bundle.svg?style=flat-square)](https://packagist.org/packages/zenstruck/asset-manifest-bundle)
+
+This bundle adds the twig function `manifest_asset` that works the same as the native `asset`
+but looks for a configured manifest json file to map assets. This file can be generated using
+[Gulp](http://gulpjs.com) and the [gulp-rev](https://github.com/sindresorhus/gulp-rev) Gulp plugin.
+
 Installation
 ------------
 
@@ -29,8 +41,11 @@ Enabled bundle:
 Configuration
 -------------
 
+By default, no manifest is configured. In development, this is probably ideal. For production,
+you will want to configure a manifest file to map your assets.
+
 ```yaml
-#app/config/config.yml
+#app/config/config_prod.yml
 #...
 
 zenstruck_asset_manifest:
@@ -42,7 +57,7 @@ zenstruck_asset_manifest:
 Usage
 -----
 
-`asset` should be replace by `manifest_asset` in twig files. 
+`asset` should be replace by `manifest_asset` in twig files.
 
 Here an example:
 
