@@ -26,7 +26,7 @@ final class AssetManifestTwigExtension extends \Twig_Extension
     public function getAssetUrl(\Twig_Environment $twig, $path, $packageName = null)
     {
         /** @var AssetExtension $asset */
-        $asset = $twig->getExtension('asset');
+        $asset = $twig->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension');
 
         if (isset($this->assetMap[$path])) {
             $path = $this->assetMap[$path];
