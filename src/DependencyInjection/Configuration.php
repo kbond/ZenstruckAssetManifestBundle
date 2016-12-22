@@ -23,6 +23,17 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('manifest_file')
                     ->defaultNull()
                 ->end()
+                ->arrayNode('prefix')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('source')
+                            ->defaultNull()
+                        ->end()
+                        ->scalarNode('destination')
+                            ->defaultNull()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

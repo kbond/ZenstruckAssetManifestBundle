@@ -13,8 +13,7 @@ This bundle adds the twig function `manifest_asset` that works the same as the n
 but looks for a configured manifest json file to map assets. This file can be generated using
 [Gulp](http://gulpjs.com) and the [gulp-rev](https://github.com/sindresorhus/gulp-rev) Gulp plugin.
 
-Installation
-------------
+# Installation
 
 Download:
 
@@ -38,8 +37,7 @@ Enabled bundle:
 //...
 ```
 
-Configuration
--------------
+# Configuration
 
 By default, no manifest is configured. In development, this is probably ideal. For production,
 you will want to configure a manifest file to map your assets.
@@ -54,8 +52,7 @@ zenstruck_asset_manifest:
 #...
 ```
 
-Usage
------
+# Usage
 
 `asset` should be replace by `manifest_asset` in twig files.
 
@@ -73,4 +70,50 @@ Here an example:
     My page content
   </body>
 </html>
+```
+
+## Prefixes
+
+Say your public (web) folder looks as follows:
+
+```
+.
+├── assets
+│   ├── build
+│   │   ├── css
+│   │   │   ├── app-8f07f52635.css
+│   │   └── rev-manifest.json
+│   └── css
+│       └── app.css
+```
+
+And your `rev-manifest.json` file looks as follows:
+
+```json
+{
+    "css/app.css": "css/app-8f07f52635.css"
+}
+```
+
+Using the `manifest_asset` twig function, you would pass `assets/css/app.css` but this wouldn't map
+correctly. To fix this, you can add prefixes to your `config.yml`:
+
+```yaml
+zenstruck_asset_manifest:
+    manifest_file: "%kernel.root_dir%/../web/assets/build/manifest.json"
+    prefix:
+        source: assets/
+        destination: assets/build/
+```
+
+Now, `assets/css/app.css` would properly map to `assets/build/css/app-8f07f52635.css`.
+
+# Full Default Config
+
+```yaml
+zenstruck_asset_manifest:
+    manifest_file: ~
+    prefix:
+        source: ~
+        destination: ~
 ```
