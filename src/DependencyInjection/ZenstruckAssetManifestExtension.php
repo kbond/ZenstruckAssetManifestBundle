@@ -25,7 +25,7 @@ final class ZenstruckAssetManifestExtension extends ConfigurableExtension
         $manifestFile = $mergedConfig['manifest_file'];
 
         if ($manifestFile !== null) {
-            $manifest = $this->loadFromFile($manifestFile);
+            $manifest = $this->loadFromFile($manifestFile, $mergedConfig['prefix']['source'], $mergedConfig['prefix']['destination']);
         }
 
         $container->getDefinition('zenstruck_asset_manifest.twig_extension')->replaceArgument(0, $manifest);
@@ -33,15 +33,23 @@ final class ZenstruckAssetManifestExtension extends ConfigurableExtension
 
     /**
      * @param string $file
+     * @param string $sourcePrefix
+     * @param string $destPrefix
      *
      * @return array
      */
-    private function loadFromFile($file)
+    private function loadFromFile($file, $sourcePrefix, $destPrefix)
     {
         if (!file_exists($file)) {
             throw new InvalidConfigurationException(sprintf('Manifest file "%s" does not exist.', $file));
         }
 
-        return json_decode(file_get_contents($file), true);
+        $manifest = [];
+
+        foreach (json_decode(file_get_contents($file), true) as $key => $value) {
+            $manifest[$sourcePrefix.$key] = $destPrefix.$value;
+        }
+
+        return $manifest;
     }
 }

@@ -34,7 +34,7 @@ final class AppKernel extends Kernel
 
     protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
     {
-        $c->loadFromExtension('framework', [
+        $frameworkConfig = [
             'secret' => 'Zenstruck\AssetManifestBundle',
             'test' => null,
             'assets' => [
@@ -42,7 +42,13 @@ final class AppKernel extends Kernel
                     'cdn' => ['base_urls' => ['https://cdn.example.com']],
                 ],
             ],
-        ]);
+        ];
+
+        if (Kernel::MAJOR_VERSION > 2) {
+            $frameworkConfig['annotations'] = false;
+        }
+
+        $c->loadFromExtension('framework', $frameworkConfig);
 
         $c->loadFromExtension('twig', [
             'paths' => ['%kernel.root_dir%' => null],
@@ -59,6 +65,17 @@ final class AppKernel extends Kernel
             case 'invalid_manifest':
                 $c->loadFromExtension('zenstruck_asset_manifest', [
                     'manifest_file' => 'invalid file',
+                ]);
+
+                break;
+
+            case 'prefixed_manifest':
+                $c->loadFromExtension('zenstruck_asset_manifest', [
+                    'manifest_file' => '%kernel.root_dir%/manifest.json',
+                    'prefix' => [
+                        'source' => 'source/prefix/',
+                        'destination' => 'destination/prefix/',
+                    ],
                 ]);
 
                 break;

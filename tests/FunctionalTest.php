@@ -41,6 +41,18 @@ final class FunctionalTest extends WebTestCase
         $this->assertSame('https://cdn.example.com/path/to/build.css', trim($client->getResponse()->getContent()));
     }
 
+    public function test_prefixed_manifest()
+    {
+        $client = self::createClient(['environment' => 'prefixed_manifest']);
+        $client->request('GET', '/test?asset=foo/bar/baz.css');
+
+        $this->assertSame('/foo/bar/baz.css', trim($client->getResponse()->getContent()));
+
+        $client->request('GET', '/test?asset=source/prefix/foo/bar/baz.css');
+
+        $this->assertSame('/destination/prefix/path/to/build.css', trim($client->getResponse()->getContent()));
+    }
+
     /**
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      * @expectedExceptionMessage Manifest file "invalid file" does not exist.
