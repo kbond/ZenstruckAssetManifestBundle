@@ -1,5 +1,4 @@
-ZenstruckAssetManifestBundle
-============================
+# ZenstruckAssetManifestBundle
 
 [![Build Status](http://img.shields.io/travis/kbond/ZenstruckAssetManifestBundle.svg?style=flat-square)](https://travis-ci.org/kbond/ZenstruckAssetManifestBundle)
 [![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/kbond/ZenstruckAssetManifestBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/kbond/ZenstruckAssetManifestBundle/)
@@ -9,11 +8,13 @@ ZenstruckAssetManifestBundle
 [![Latest Stable Version](http://img.shields.io/packagist/v/zenstruck/asset-manifest-bundle.svg?style=flat-square)](https://packagist.org/packages/zenstruck/asset-manifest-bundle)
 [![License](http://img.shields.io/packagist/l/zenstruck/asset-manifest-bundle.svg?style=flat-square)](https://packagist.org/packages/zenstruck/asset-manifest-bundle)
 
-This bundle adds the twig function `manifest_asset` that works the same as the native `asset`
+This bundle adds the twig function `manifest_asset` that is a wrapper for the native `asset`
 but looks for a configured manifest json file to map assets. This file can be generated using
 [Gulp](http://gulpjs.com) and the [gulp-rev](https://github.com/sindresorhus/gulp-rev) Gulp plugin.
+If you have used [Laravel](https://laravel.com/) with [Laravel Elixir](https://github.com/laravel/elixir)
+the `manifest_asset` function is similar to Laravel's `elixir` function.
 
-# Installation
+## Installation
 
 Download:
 
@@ -37,7 +38,7 @@ Enabled bundle:
 //...
 ```
 
-# Configuration
+## Configuration
 
 By default, no manifest is configured. In development, this is probably ideal. For production,
 you will want to configure a manifest file to map your assets.
@@ -52,9 +53,9 @@ zenstruck_asset_manifest:
 #...
 ```
 
-# Usage
+## Usage
 
-`asset` should be replace by `manifest_asset` in twig files.
+`asset` should be replaced by `manifest_asset` in twig files.
 
 Here an example:
 
@@ -72,7 +73,10 @@ Here an example:
 </html>
 ```
 
-## Prefixes
+**Note**: If no manifest file is configured, the `manifest_asset` behaves exactly like the native
+`asset` function.
+
+### Prefixes
 
 Say your public (web) folder looks as follows:
 
@@ -81,7 +85,7 @@ Say your public (web) folder looks as follows:
 ├── assets
 │   ├── build
 │   │   ├── css
-│   │   │   ├── app-8f07f52635.css
+│   │   │   └── app-8f07f52635.css
 │   │   └── rev-manifest.json
 │   └── css
 │       └── app.css
@@ -108,7 +112,7 @@ zenstruck_asset_manifest:
 
 Now, `assets/css/app.css` would properly map to `assets/build/css/app-8f07f52635.css`.
 
-# Full Default Config
+## Full Default Config
 
 ```yaml
 zenstruck_asset_manifest:
