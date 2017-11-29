@@ -1,3 +1,5 @@
+**NOTE**: This functionality of this bundle is now in [Symfony Core](https://symfony.com/doc/4.0/frontend/encore/versioning.html#loading-assets-from-the-manifest-json-file).
+
 # ZenstruckAssetManifestBundle
 
 [![Build Status](http://img.shields.io/travis/kbond/ZenstruckAssetManifestBundle.svg?style=flat-square)](https://travis-ci.org/kbond/ZenstruckAssetManifestBundle)
